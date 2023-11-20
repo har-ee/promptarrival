@@ -41,7 +41,7 @@ async def on_message(message):
         arrival_time = int(time_num)
 
         await asyncio.sleep(arrival_time)  # Convert minutes to seconds
-        await channel.send(f"{message.author.mention}, {time_str} has passed. Have you arrived?")
+        await channel.send(f"{message.author.mention} you said `{time_str}`. Are you here?")
     except ValueError:
         print("Invalid time format")
 
