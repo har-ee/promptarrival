@@ -1,14 +1,25 @@
 import re
 
 def extract_time_from_message(message):
-    time_pattern = re.compile(r'(?:in|be|brb|give\s*me)\s*(\d+|\d+\s*-\s*\d+)\s*(sec|secs|second|seconds|min|mins|minute|minutes|h|hour|hours)\s*(\d+)?', re.IGNORECASE)
+    # Match words preceding a promise of a certain timeframe
+    announcement_pattern = r'(?:in|be|brb|give\s*me)'
 
+    # Match various ways of representing a time as a string
+    timestr_pattern = r'(\d+|\d+\s*-\s*\d+)\s*(sec(?:ond)?|s|min(?:ute)?|m|hour|h)s?\s*(\d+)?'
+
+    time_pattern = re.compile(announcement_pattern + r'\s*' + timestr_pattern, re.IGNORECASE)
     match = time_pattern.search(message)
 
     if match:
         whole_str = match.group(0)
+
+        # The number in the time, can be a range like 10-20
         time_str = match.group(1).replace(' ', '')
+
+        # The units of time, such as 'minutes'
         time_units = match.group(2).lower()
+
+        # Capture cases like the 30 in '1 hour 30'
         time_str_extra = match.group(3)
 
         if '-' in time_str:
