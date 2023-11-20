@@ -25,8 +25,6 @@ def extract_time_from_message(message):
                 extra_mins = int(time_str_extra)
                 time_seconds += (extra_mins * 60)
 
-        print(time_str, time_units, time_seconds)
-
         return time_seconds, whole_str.strip().lower()
 
     return None, None
