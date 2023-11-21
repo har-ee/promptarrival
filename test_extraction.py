@@ -1,5 +1,31 @@
 import unittest
-from extraction import extract_time_from_message
+from extraction import calculate_time_seconds, extract_time_from_message
+
+class TestCalculateTimeSeconds(unittest.TestCase):
+
+    def test_minutes_conversion(self):
+        result = calculate_time_seconds("10", "min", None)
+        self.assertEqual(result, 600)
+
+    def test_hour_conversion(self):
+        result = calculate_time_seconds("2", "hour", None)
+        self.assertEqual(result, 7200)
+
+    def test_hour_with_extra_minutes_conversion(self):
+        result = calculate_time_seconds("1", "hour", "30")
+        self.assertEqual(result, 5400)
+
+    def test_seconds_conversion(self):
+        result = calculate_time_seconds("45", "sec", None)
+        self.assertEqual(result, 45)
+
+    def test_range_conversion(self):
+        result = calculate_time_seconds("5-10", "min", None)
+        self.assertEqual(result, 600)  # Use the upper bound of the range, so 10 minutes in seconds
+
+    def test_invalid_time_str(self):
+        with self.assertRaises(ValueError):
+            calculate_time_seconds("abc", "min", None)
 
 class TestExtractTimeFromMessage(unittest.TestCase):
 
