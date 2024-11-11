@@ -113,6 +113,18 @@ class TestExtractTimeFromMessage(unittest.TestCase):
         self.assertEqual(result, 7080)
         self.assertEqual(matched_str, "give me 1 hour 58")
 
+    def test_give_me_string(self):
+        message = "gimme 1 hour"
+        result, matched_str = extract_time_from_message(message)
+        self.assertEqual(result, 3600)
+        self.assertEqual(matched_str, "gimme 1 hour")
+
+    def test_give_me_string(self):
+        message = "give me about 10 mins"
+        result, matched_str = extract_time_from_message(message)
+        self.assertEqual(result, 600)
+        self.assertEqual(matched_str, "give me about 10 mins")
+
 if __name__ == '__main__':
     unittest.main()
 

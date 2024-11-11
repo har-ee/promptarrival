@@ -23,7 +23,7 @@ def calculate_time_seconds(time_value, time_unit, time_value_extra):
 
 def create_time_regex():
     # Match words preceding a promise of a certain timeframe
-    announcement_pattern = r'(?:in|be|brb|give\s*me)'
+    announcement_pattern = r'(?:in|be|brb|give\s*me|gimme|like|at)\s*(?:like|roughly|about)?'
 
     # Match various ways of representing a time as a string
     timestr_pattern = r'(\d+|\d+\s*-\s*\d+)\s*(sec(?:ond)?|s|min(?:ute)?|m|hour|h)s?\s*(\d+)?'
